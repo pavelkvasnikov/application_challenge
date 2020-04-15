@@ -1,0 +1,14 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.5.7'
+
+gem 'sequel'
+gem 'dry-transformer'
+gem 'rspec'
+gem 'simplecov', require: false, group: :test
+gem 'rubocop', require: false
+gem 'vcr'
+gem 'webmock'
+gem 'mysql2'
+gem 'rake'

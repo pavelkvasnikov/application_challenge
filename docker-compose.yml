@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./app:/app
+    stdin_open: true
+    tty: true
+    command: '/bin/bash' #'bundle exec ruby -r "./app.rb" -e "call" '
+
+
+  mysql:
+    image: 'mysql:5.7'
+    ports:
+      - 3306:3306
+    volumes:
+      - /opt/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'pass'
+
+  fake_api:
+    build:
+      context: ./fake_api
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./fake_api:/app
+    command: 'bundle exec ruby main.rb -o 0.0.0.0'
+    stdin_open: true
+    tty: true
+    ports:
+    - 4567:4567

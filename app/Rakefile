@@ -1,0 +1,7 @@
+require './lib/app'
+
+task :deploy do
+  `zip -r app.zip .`
+  `aws lambda update-function-code --function-name app_chalenge --zip-file fileb://app.zip`
+  puts 'Deployed'
+end
