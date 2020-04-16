@@ -5,7 +5,7 @@ module Processor
     def self.call
       new.call
     end
-# mysql2://admin:cNSNkO7LWnpnq3Nrt7JH@database-1.ctbjvcdaq4ib.us-west-2.rds.amazonaws.com:3306
+
     def initialize
       @conn = Sequel.connect(ENV['database'] || 'mysql2://root:pass@mysql:3306')
     end
@@ -31,7 +31,7 @@ module Processor
       puts @conn.execute('use visitor')
       puts 'starting migration'
       Sequel.extension :migration
-      puts Sequel::Migrator.run(@conn, '/app/lib/migrations/', use_transactions: false)
+      puts Sequel::Migrator.run(@conn, './lib/migrations/', use_transactions: false)
       puts 'migration finished'
     end
 
