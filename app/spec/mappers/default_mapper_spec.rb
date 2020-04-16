@@ -8,7 +8,7 @@ RSpec.describe Mapper::DefaultMapper do
   ].freeze
   describe '.call' do
 
-    it 'returns error' do
+    it 'returns formatted data' do
       mapper = Mapper::DefaultMapper.new
       fetch_result = Fetcher::FakeFetcher.call(nil, nil).unwrap
       data = mapper.call(JSON.parse(fetch_result[:data]))
