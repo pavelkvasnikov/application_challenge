@@ -41,9 +41,9 @@ module Processor
       data = mapper.call(JSON.parse(fetch_result[:data]))
       data.each do |visit|
         page_views = visit.delete(:actionDetails)
-        @conn[:visits].insert(visit)
+        current_visit = @conn[:visits].insert(visit)
         page_views.each do |pv|
-          visit_id = { visit_id: @conn[:visits].order(:id).first[:id] }
+          visit_id = { visit_id: current_visit }
           @conn[:page_views].insert(pv.merge(visit_id))
         end
       end
